@@ -1,0 +1,191 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#page {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#container {
+    width: 400px;
+    height: 400px;
+    background-color: rgb(0, 0, 85);
+    border: black 2px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+#display {
+    width: 100%;
+    height: 50px;
+    border: solid black 2px;
+    background-color: rgb(209, 209, 209);
+    border-radius: 5px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#workingLine {
+    width: 90%;
+    text-align: left;
+}
+
+#resultLine {
+    width: 90%;
+    text-align: right;
+}
+
+#buttonContainer {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+
+button {
+    border: 0;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0 0);
+}
+
+button:active {
+    border: 2px white solid;
+}
+
+.number {
+    background-color: rgb(93, 175, 243);
+}
+
+.operator, #equals {
+    background-color: rgb(255, 165, 104);
+}
+
+#equals {
+    color: white;
+}
+
+#decimal {
+    background-color: rgb(150, 123, 248);;
+}
+
+#clear {
+    background-color: rgb(255, 83, 135);
+}
+
+#b0 {
+    grid-column: 1;
+    grid-row: 4;
+}
+
+#b1 {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+#b2 {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+#b3 {
+    grid-column: 3;
+    grid-row: 3;
+}
+
+#b4 {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+#b5 {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+#b6 {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+#b7 {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+#b8 {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+#b9 {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+#decimal {
+    grid-column: 2;
+    grid-row: 4;
+}
+
+#clear{
+    grid-column: 3;
+    grid-row: 4;
+}
+
+#divide{
+    grid-column: 4;
+    grid-row: 1;
+}
+
+#multiply {
+    grid-column: 4;
+    grid-row: 2;
+}
+
+#minus {
+    grid-column: 4;
+    grid-row: 3;
+}
+
+#plus {
+    grid-column: 4;
+    grid-row: 4;
+}
+
+#positiveNegative {
+    grid-column: 5;
+    grid-row: 1;
+}
+
+#squareRoot {
+    grid-column: 5;
+    grid-row: 2;
+}
+
+#percent {
+    grid-column: 5;
+    grid-row: 3;
+}
+
+#equals {
+    grid-column: 5;
+    grid-row: 4;
+}
