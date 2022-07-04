@@ -83,8 +83,16 @@ button:active {
     background-color: rgb(93, 175, 243);
 }
 
-.operator, #equals {
+#equals {
+    background-color: rgb(255, 102, 0);
+}
+
+.operator {
     background-color: rgb(255, 165, 104);
+}
+
+.specialOperator {
+    background-color: rgb(255, 141, 65);
 }
 
 #equals {
