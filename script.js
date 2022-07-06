@@ -47,15 +47,7 @@ function updateResult(value) {
     resultDisplay.textContent = value;
 }
 
-function errorCheck() {
-    if (((workingData.left).split('.')).length > 2 || ((workingData.right).split('.')).length > 2) {
-        alert('you broke it :(');
-    }
-    else if (((workingData.left).split('.'))[1] === '' || ((workingData.right).split('.'))[1] === '') {
-        alert('you broke it :(');
-    }
-}
-
+clearPress();
 let inputSide = 'left'
 
 function checkSide() {
