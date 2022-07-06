@@ -38,14 +38,13 @@ let workingData = {
 
 let workingDisplay = document.getElementById('workingLine');
 function updateDisplay() {
-    workingDisplay.textContent = `${workingData.left}${workingData.operator}${workingData.right}`;
+    workingDisplay.textContent = `${workingData.left}${workingData.operatorDisplay}${workingData.right}`;
 }
 
 let resultDisplay = document.getElementById("resultLine");
 
 function updateResult(value) {
     resultDisplay.textContent = value;
-    memory = value;
 }
 
 function errorCheck() {
@@ -106,15 +105,37 @@ function numberPress(button) {
 
 function specialOperatorPress(button) {
     checkSide();
-    if (inputSide === 'left') {
+    if (inputSide === 'left' && workingData.left !== '') {
         workingData[inputSide] = specialOperation(button.id).toFixed(4);
         updateDisplay();   
     }
+    else if (inputSide === 'left' && workingData.left === '') {
+        if (memory !== '') {
+            workingData.left = memory;
+            workingData[inputSide] = specialOperation(button.id).toFixed(4);
+            updateDisplay();   
+        }
+        else if (memory === '') {
+            alert('Please enter a number')
+        }
+    }
     else if (inputSide === 'right' && workingData.right !== '') {
-        updateResult(doCalculation());
+        updateResult(doCalculation().toFixed(4));
         workingData.left = memory;
         inputSide = 'left';
-        specialOperation(button.id);
+        workingData.left = specialOperation(button.id);
+        updateDisplay();
+    }
+    else if (inputSide === 'right' && workingData.right === '') {
+        if (memory !== '') {
+            inputSide = 'left';
+            workingData.left = memory;
+            workingData[inputSide] = specialOperation(button.id).toFixed(4);
+            updateDisplay();   
+        }
+        else if (memory === '') {
+            alert('Please enter a number')
+        }
     }
 }
 
@@ -146,21 +167,86 @@ function equalsPress() {
         }
         else {
             updateResult(doCalculation().toFixed(4));
-            workingData.left, workingData.right, workingData.operator = '';
-            updateDisplay();
         }
     }
 }
 
 function doCalculation() {
+    let result = null;
     switch (workingData.operator) {
         case 'divide':
-            return parseFloat(workingData.left/workingData.right);
+            result = parseFloat(workingData.left/workingData.right);
+            break;
         case 'multiply':
-            return parseFloat(workingData.left*workingData.right);
+            result = parseFloat(workingData.left*workingData.right);
+            break;
         case 'minus':
-            return parseFloat(workingData.left-workingData.right);
+            result = parseFloat(workingData.left-workingData.right);
+            break;
         case 'plus':
-            return parseFloat(workingData.left+workingData.right);
+            result = parseFloat(parseFloat(workingData.left)+parseFloat(workingData.right));
+            break;
     }
+    workingData.left = workingData.right = workingData.operator = workingData.operatorDisplay = '';
+    memory = result;
+    return result;
+}
+
+function operatorPress(button) {
+    checkSide();
+    if (inputSide === 'left' && workingData.left !== '') {
+        workingData.operator = button.id;
+        workingData.operatorDisplay = button.textContent;
+        updateDisplay();
+    }
+    else if (inputSide === 'left' && workingData.left === '') {
+        if (memory !== '') {
+            workingData.left = memory;
+            workingData.operator = button.id;
+            workingData.operatorDisplay = button.textContent;
+            updateDisplay();
+        }
+        else if (memory === '') {
+            alert('Please enter a number')
+        }
+    }
+    else if (inputSide === 'right' && workingData.right === '') {
+        workingData.operator = button.id;
+        workingData.operatorDisplay = button.textContent;
+        updateDisplay();
+    }
+    else if (inputSide === 'right' && workingData.right !== '') {
+        updateResult(doCalculation().toFixed(4));
+        workingData.left = memory;
+        inputSide = 'left';
+        workingData.operator = button.id;
+        workingData.operatorDisplay = button.textContent;
+        updateDisplay();
+    }
+}
+
+function delPress() {
+    checkSide();
+    if (inputSide === 'left' && workingData.left !== '') {
+        workingData.left = String(workingData.left).slice(0,-1);
+        updateDisplay();
+    }
+    else if (inputSide === 'left' && workingData.left === '') {
+       null;
+    }
+    else if (inputSide === 'right' && workingData.right === '') {
+        workingData.operator = '';
+        workingData.operatorDisplay = '';
+        updateDisplay();
+    }
+    else if (inputSide === 'right' && workingData.right !== '') {
+        workingData.right = String(workingData.right).slice(0,-1);
+        updateDisplay();
+    }
+}
+
+function clearPress() {
+    workingData.left = workingData.right = workingData.operator = workingData.operatorDisplay = '';
+    updateDisplay();
+    updateResult('');
 }
